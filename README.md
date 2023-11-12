@@ -1,5 +1,5 @@
 ```yaml
-Captains Comms v0.0.0
+Captains Comms v0.1.0
 ```
 ```
 Mod Author: Mest
@@ -14,11 +14,11 @@ Function: **Adds new comms screens within reach of the Captains Chair.**
 
 Ships:
 - [x] Intrepid
-- [ ] Roland
+- [x] Roland
 - [x] Outrider
 - [ ] Cruiser
-- [ ] Destroyer
-- [ ] Carrier
+- [x] Destroyer
+- [x] Carrier
 - [x] Swordship
 - [ ] Fluffyone
 
