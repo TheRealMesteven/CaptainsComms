@@ -53,7 +53,7 @@ namespace CaptainsComms
                 NewScreen.transform.parent = pLCommsScreen.transform.parent;
                 NewScreen.layer = pLCommsScreen.gameObject.layer;
                 NewScreen.transform.position = __instance.CaptainsChairPivot.transform.position;
-                GameObject.DontDestroyOnLoad(NewScreen);
+                //GameObject.DontDestroyOnLoad(NewScreen);
                 return NewScreen;
             }
             return null;
