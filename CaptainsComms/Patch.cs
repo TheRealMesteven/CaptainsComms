@@ -14,10 +14,22 @@ namespace CaptainsComms
             Screen.transform.localPosition = new Vector3(-2.2f, 0.4f, 12.5f);
         }
     }
+    [HarmonyPatch(typeof(PLRolandInfo), "SetupShipStats")]
+    internal class RolandPatch
+    {
+        private static void Postfix(PLRolandInfo __instance, bool previewStats)
+        {
+            if (previewStats || !Mod.Config.Roland) return;
+            GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
+            if (Screen == null) return;
+            Screen.transform.localPosition = new Vector3(1.524f, 19.584f, 42.54f);
+            Screen.transform.rotation = Quaternion.Euler(0, 307, 0);
+        }
+    }
     [HarmonyPatch(typeof(PLOutriderInfo), "SetupShipStats")]
     internal class OutriderPatch
     {
-        private static void Postfix(PLIntrepidInfo __instance, bool previewStats)
+        private static void Postfix(PLOutriderInfo __instance, bool previewStats)
         {
             if (previewStats || !Mod.Config.Outrider) return;
             GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
@@ -26,16 +38,40 @@ namespace CaptainsComms
             Screen.transform.rotation = Quaternion.Euler(359.9f, 135.64f, 0f);
         }
     }
+    [HarmonyPatch(typeof(PLWDDestroyerInfo), "SetupShipStats")]
+    internal class DestroyerPatch
+    {
+        private static void Postfix(PLWDDestroyerInfo __instance, bool previewStats)
+        {
+            if (previewStats || !Mod.Config.Destroyer) return;
+            GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
+            if (Screen == null) return;
+            Screen.transform.localPosition = new Vector3(1.426f, 4.196f, -10.242f);
+            Screen.transform.rotation = Quaternion.Euler(0, 313, 0);
+        }
+    }
+    [HarmonyPatch(typeof(PLCarrierInfo), "SetupShipStats")]
+    internal class CarrierPatch
+    {
+        private static void Postfix(PLCarrierInfo __instance, bool previewStats)
+        {
+            if (previewStats || !Mod.Config.Carrier) return;
+            GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
+            if (Screen == null) return;
+            Screen.transform.localPosition = new Vector3(-3.56f, 17.453f, 65.575f);
+            Screen.transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
+    }
     [HarmonyPatch(typeof(PLOldWarsShip_Sylvassi), "SetupShipStats")]
     internal class SwordshipPatch
     {
-        private static void Postfix(PLIntrepidInfo __instance, bool previewStats)
+        private static void Postfix(PLOldWarsShip_Sylvassi __instance, bool previewStats)
         {
             if (previewStats || !Mod.Config.Swordship) return;
             GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
             if (Screen == null) return;
-            Screen.transform.localPosition = new Vector3(2.17f, 4.78f, 14.08f);
-            Screen.transform.rotation = Quaternion.Euler(325.738f, 297.0586f, 0);
+            Screen.transform.localPosition = new Vector3(2.55f, 5.588f, 14.78f);
+            Screen.transform.rotation = Quaternion.Euler(0, 280, 0);
         }
     }
 }

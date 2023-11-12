@@ -9,7 +9,7 @@ namespace CaptainsComms
         public override string HarmonyIdentifier() => "Mest.CaptainsComms";
         public override string Name => "Captains Comms";
         public override string Author => "Mest";
-        public override string Version => "0.0.0";
+        public override string Version => "0.1.0";
         public override string ShortDescription => "Moves comms screen to an accessible location";
         internal class Config : ModSettingsMenu
         {
@@ -23,13 +23,13 @@ namespace CaptainsComms
                 Outrider.Value = GUILayout.Toggle(Outrider.Value, "Outrider Comms Screen");
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
-                Cruiser.Value = GUILayout.Toggle(Cruiser.Value, "Cruiser Comms Screen");
+                //Cruiser.Value = GUILayout.Toggle(Cruiser.Value, "Cruiser Comms Screen");
                 Destroyer.Value = GUILayout.Toggle(Destroyer.Value, "Destroyer Comms Screen");
                 Carrier.Value = GUILayout.Toggle(Carrier.Value, "Carrier Comms Screen");
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 Swordship.Value = GUILayout.Toggle(Swordship.Value, "Swordship Comms Screen");
-                FluffyOne.Value = GUILayout.Toggle(FluffyOne.Value, "FluffyOne Comms Screen");
+                //FluffyOne.Value = GUILayout.Toggle(FluffyOne.Value, "FluffyOne Comms Screen");
                 GUILayout.EndHorizontal();
             }
             public static SaveValue<bool> Intrepid = new SaveValue<bool>("Intrepid", true);
