@@ -73,18 +73,6 @@ namespace CaptainsComms
             Screen.transform.rotation = Quaternion.Euler(0, 90, 0);
         }
     }
-    [HarmonyPatch(typeof(PLAlchemistShipInfo), "SetupShipStats")]
-    internal class AlchemistPatch
-    {
-        private static void Postfix(PLAlchemistShipInfo __instance, bool previewStats)
-        {
-            if (previewStats || !Mod.Config.Alchemist) return;
-            GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
-            if (Screen == null) return;
-            Screen.transform.localPosition = new Vector3(-3.56f, 17.453f, 65.575f);
-            Screen.transform.rotation = Quaternion.Euler(0, 90, 0);
-        }
-    }
     [HarmonyPatch(typeof(PLOldWarsShip_Sylvassi), "SetupShipStats")]
     internal class SwordshipPatch
     {

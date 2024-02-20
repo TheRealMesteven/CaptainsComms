@@ -1,5 +1,8 @@
-﻿using PulsarModLoader;
+﻿using HarmonyLib;
+using PulsarModLoader;
 using PulsarModLoader.CustomGUI;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CaptainsComms
@@ -9,7 +12,7 @@ namespace CaptainsComms
         public override string HarmonyIdentifier() => "Mest.CaptainsComms";
         public override string Name => "Captains Comms";
         public override string Author => "Mest";
-        public override string Version => "0.1.0";
+        public override string Version => "0.1.2";
         public override string ShortDescription => "Moves comms screen to an accessible location";
         internal class Config : ModSettingsMenu
         {
@@ -30,7 +33,6 @@ namespace CaptainsComms
                 GUILayout.BeginHorizontal();
                 Swordship.Value = GUILayout.Toggle(Swordship.Value, "Swordship Comms Screen");
                 IntrepidSC.Value = GUILayout.Toggle(IntrepidSC.Value, "Intrepid SC Comms Screen");
-                Alchemist.Value = GUILayout.Toggle(Alchemist.Value, "Alchemist Comms Screen");
                 //FluffyOne.Value = GUILayout.Toggle(FluffyOne.Value, "FluffyOne Comms Screen");
                 GUILayout.EndHorizontal();
             }
@@ -43,7 +45,6 @@ namespace CaptainsComms
             public static SaveValue<bool> Swordship = new SaveValue<bool>("Swordship", true);
             public static SaveValue<bool> FluffyOne = new SaveValue<bool>("FluffyOne", true);
             public static SaveValue<bool> IntrepidSC = new SaveValue<bool>("IntrepidSC", true);
-            public static SaveValue<bool> Alchemist = new SaveValue<bool>("Alchemist", true);
         }
     }
     public class UsefulMethods
@@ -53,14 +54,24 @@ namespace CaptainsComms
             foreach (PLCommsScreen pLCommsScreen in __instance.InteriorDynamic.GetComponentsInChildren<PLCommsScreen>())
             {
                 if (pLCommsScreen == null) continue;
-                GameObject NewScreen = GameObject.Instantiate(pLCommsScreen.gameObject);
-                NewScreen.transform.parent = pLCommsScreen.transform.parent;
-                NewScreen.layer = pLCommsScreen.gameObject.layer;
-                NewScreen.transform.position = __instance.CaptainsChairPivot.transform.position;
-                //GameObject.DontDestroyOnLoad(NewScreen);
-                return NewScreen;
+                GameObject Screen = GameObject.Instantiate(pLCommsScreen.gameObject);
+                Screen.transform.parent = pLCommsScreen.transform.parent;
+                Screen.layer = pLCommsScreen.gameObject.layer;
+                Screen.transform.position = __instance.CaptainsChairPivot.transform.position;
+                return Screen;
             }
             return null;
+        }
+    }
+    [HarmonyPatch(typeof(PLCommsScreen), "Update")]
+    internal class WhiteBarRemoval
+    {
+        private static void Prefix(PLCommsScreen __instance)
+        {
+            if (__instance != null && __instance.name.Contains("(Clone)") && __instance.transform.GetChildCount() == 4)
+            {
+                __instance.transform.GetChild(1).gameObject.SetActive(false);
+            }
         }
     }
 }
