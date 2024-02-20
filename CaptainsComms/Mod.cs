@@ -29,6 +29,8 @@ namespace CaptainsComms
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 Swordship.Value = GUILayout.Toggle(Swordship.Value, "Swordship Comms Screen");
+                IntrepidSC.Value = GUILayout.Toggle(IntrepidSC.Value, "Intrepid SC Comms Screen");
+                Alchemist.Value = GUILayout.Toggle(Alchemist.Value, "Alchemist Comms Screen");
                 //FluffyOne.Value = GUILayout.Toggle(FluffyOne.Value, "FluffyOne Comms Screen");
                 GUILayout.EndHorizontal();
             }
@@ -40,6 +42,8 @@ namespace CaptainsComms
             public static SaveValue<bool> Carrier = new SaveValue<bool>("Carrier", true);
             public static SaveValue<bool> Swordship = new SaveValue<bool>("Swordship", true);
             public static SaveValue<bool> FluffyOne = new SaveValue<bool>("FluffyOne", true);
+            public static SaveValue<bool> IntrepidSC = new SaveValue<bool>("IntrepidSC", true);
+            public static SaveValue<bool> Alchemist = new SaveValue<bool>("Alchemist", true);
         }
     }
     public class UsefulMethods

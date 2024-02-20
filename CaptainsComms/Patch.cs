@@ -3,6 +3,17 @@ using UnityEngine;
 
 namespace CaptainsComms
 {
+    [HarmonyPatch(typeof(PLIntrepidCommanderInfo), "SetupShipStats")]
+    internal class IntrepidSCPatch
+    {
+        private static void Postfix(PLIntrepidCommanderInfo __instance, bool previewStats)
+        {
+            if (previewStats || !Mod.Config.IntrepidSC) return;
+            GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
+            if (Screen == null) return;
+            Screen.transform.localPosition = new Vector3(-2.2f, 0.4f, 12.5f);
+        }
+    }
     [HarmonyPatch(typeof(PLIntrepidInfo), "SetupShipStats")]
     internal class IntrepidPatch
     {
@@ -56,6 +67,18 @@ namespace CaptainsComms
         private static void Postfix(PLCarrierInfo __instance, bool previewStats)
         {
             if (previewStats || !Mod.Config.Carrier) return;
+            GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
+            if (Screen == null) return;
+            Screen.transform.localPosition = new Vector3(-3.56f, 17.453f, 65.575f);
+            Screen.transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
+    }
+    [HarmonyPatch(typeof(PLAlchemistShipInfo), "SetupShipStats")]
+    internal class AlchemistPatch
+    {
+        private static void Postfix(PLAlchemistShipInfo __instance, bool previewStats)
+        {
+            if (previewStats || !Mod.Config.Alchemist) return;
             GameObject Screen = UsefulMethods.DuplicateCommsScreen(__instance);
             if (Screen == null) return;
             Screen.transform.localPosition = new Vector3(-3.56f, 17.453f, 65.575f);
